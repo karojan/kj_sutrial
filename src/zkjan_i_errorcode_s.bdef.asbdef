@@ -1,0 +1,94 @@
+managed with additional save implementation in class ZBP_I_KJANERRORCODE_S unique;
+strict;
+with draft;
+
+define behavior for ZKjan_I_ErrorCode_S alias KjanErrorCodeAll
+draft table ZKJAN_E_C_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+
+{
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _KjanErrorCode { create ( features : instance ); with draft; }
+}
+
+define behavior for ZKjan_I_ErrorCode alias KjanErrorCode
+persistent table ZKJAN_E_C
+draft table ZKJAN_E_C_D
+etag master LocalLastChangedAt
+lock dependent by _KjanErrorCodeAll
+authorization dependent by _KjanErrorCodeAll
+
+{
+  field ( mandatory : create )
+   ErorrCode;
+
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   ErorrCode;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZKJAN_E_C
+  {
+    ErorrCode = ERORR_CODE;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _KjanErrorCodeAll { with draft; }
+  association _KjanErrorCodeText { create ( features : global ); with draft; }
+
+  validation ValidateRecordChanges on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}
+
+define behavior for ZKjan_I_ErrorCodeText alias KjanErrorCodeText
+persistent table ZKJAN_E_C_T
+draft table ZKJAN_E_C_T_D
+etag master LocalLastChangedAt
+lock dependent by _KjanErrorCodeAll
+authorization dependent by _KjanErrorCodeAll
+
+{
+  field ( mandatory : create )
+   Langu;
+
+  field ( readonly )
+   SingletonID,
+   ErrorCode;
+
+  field ( readonly : update )
+   Langu;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZKJAN_E_C_T
+  {
+    Langu = LANGU;
+    ErrorCode = ERROR_CODE;
+    Description = DESCRIPTION;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _KjanErrorCodeAll { with draft; }
+  association _KjanErrorCode { with draft; }
+
+  validation ValidateRecordChanges on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}

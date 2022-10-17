@@ -1,0 +1,39 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'KjanErrorCodeText', 
+    typeNamePlural: 'KjanErrorCodeTexts', 
+    title: {
+      type: #STANDARD, 
+      label: 'KJan error code Text', 
+      value: 'Langu'
+    }
+  }
+}
+annotate view ZKjan_C_ErrorCodeText with
+{
+  @UI.facet: [ {
+    id: 'ZKjan_I_ErrorCodeText', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'KJan error code Text', 
+    position: 1 
+  } ]
+  @UI.identification: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  @UI.lineItem: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  Langu;
+  
+  @UI.identification: [ {
+    position: 2 
+  } ]
+  @UI.lineItem: [ {
+    position: 2 
+  } ]
+  Description;
+}

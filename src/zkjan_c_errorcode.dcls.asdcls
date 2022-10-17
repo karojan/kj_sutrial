@@ -1,0 +1,5 @@
+@MappingRole: true
+define role ZKjan_C_ErrorCode {
+  grant select on ZKjan_C_ErrorCode
+  where INHERITING CONDITIONS FROM ENTITY ZKjan_I_ErrorCode;
+}

@@ -1,0 +1,5 @@
+define service ZUI_KJANERRORCODE {
+  expose ZKJAN_C_ERRORCODE_S as KjanErrorCodeAll;
+  expose ZKJAN_C_ERRORCODE as KjanErrorCode;
+  expose ZKJAN_C_ERRORCODETEXT as KjanErrorCodeText;
+}

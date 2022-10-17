@@ -1,0 +1,5 @@
+@MappingRole: true
+define role ZKjan_I_ErrorCode {
+  grant select on ZKjan_I_ErrorCode
+  where ( ) = ASPECT pfcg_auth ( 'S_TABU_NAM', ACTVT = '03', TABLE = 'ZKJAN_I_ERRORCODE' );
+}

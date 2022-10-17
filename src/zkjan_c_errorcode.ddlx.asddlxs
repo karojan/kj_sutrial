@@ -1,0 +1,45 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'KjanErrorCode', 
+    typeNamePlural: 'KjanErrorCodes', 
+    title: {
+      type: #STANDARD, 
+      label: 'KJan error code', 
+      value: 'ErorrCode'
+    }
+  }
+}
+annotate view ZKjan_C_ErrorCode with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  } ]
+  @UI.facet: [ {
+    id: 'ZKjan_I_ErrorCode', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'KJan error code', 
+    position: 1 
+  }, 
+  {
+    id: 'ZKjan_I_ErrorCodeText', 
+    type: #LINEITEM_REFERENCE, 
+    label: 'KJan error code Text', 
+    position: 2 , 
+    targetElement: '_KjanErrorCodeText'
+  } ]
+  ErorrCode;
+  
+  @UI.identification: [ {
+    hidden: true, 
+    position: 2 
+  } ]
+  @UI.lineItem: [ {
+    position: 2 
+  } ]
+  Description;
+}
